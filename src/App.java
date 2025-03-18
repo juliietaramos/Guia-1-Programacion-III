@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -40,11 +41,11 @@ public class App {
                 case 2 -> transformarNombresAMayusculas().forEach(System.out::println);
                 case 3 -> ordenarListaNumeros().forEach(System.out::println);
                 case 4 -> System.out.printf("Cantidad de números mayores que 5: %d", contarMayoresQue(5));
-                case 5 -> System.out.printf("", obtenerPrimeros5Elementos());
-                //case 6 -> convertirPalabrasALongitud();
-                //case 7 -> concatenarNombres();
-                //case 8 -> eliminarDuplicados();
-                //case 9 -> obtenerTop3Numeros();
+                case 5 -> System.out.println("" + obtenerPrimeros5Elementos());
+                case 6 -> System.out.println(convertirPalabrasALongitud());
+                case 7 -> System.out.println(concatenarNombres());
+                case 8 -> System.out.println(eliminarDuplicados());
+                case 9 -> obtenerTop3Numeros().forEach(System.out::println);
                 //case 10 -> agruparPalabrasPorLongitud();
                 //case 11 -> productoDeNumeros();
                 //case 12 -> nombreMasLargo();
@@ -89,4 +90,30 @@ public class App {
                 .limit(5)
                 .toList();
     }
+
+    private static List<Integer> convertirPalabrasALongitud(){
+        return palabras.stream()
+                .map(String::length)
+                .toList();
+    }
+
+    private static String concatenarNombres(){
+        return nombres.stream()
+                .reduce((p1 , p2) -> p1 + ", " + p2)
+                .orElse(" ");
+    }
+
+    private static List<Integer> eliminarDuplicados(){
+        return numeros.stream()
+                .distinct()
+                .toList();
+    }
+
+    private static List<Integer> obtenerTop3Numeros(){
+        return numeros.stream()
+                .sorted(Comparator.reverseOrder())
+                .limit(3)
+                .toList();
+    }
+
 }
