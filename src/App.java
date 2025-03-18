@@ -36,11 +36,11 @@ public class App {
             scanner.nextLine(); // Consumir salto de línea
 
             switch (opcion) {
-                //case 1 -> filtrarNumerosPares();
-                //case 2 -> transformarNombresAMayusculas();
-                //case 3 -> ordenarListaNumeros();
-                //case 4 -> contarMayoresQue(5) ;
-                //case 5 -> obtenerPrimeros5Elementos();
+                case 1 -> filtrarNumerosPares().forEach(System.out::println);
+                case 2 -> transformarNombresAMayusculas().forEach(System.out::println);
+                case 3 -> ordenarListaNumeros().forEach(System.out::println);
+                case 4 -> System.out.printf("Cantidad de números mayores que 5: %d", contarMayoresQue(5));
+                case 5 -> System.out.printf("", obtenerPrimeros5Elementos());
                 //case 6 -> convertirPalabrasALongitud();
                 //case 7 -> concatenarNombres();
                 //case 8 -> eliminarDuplicados();
@@ -61,5 +61,32 @@ public class App {
 
     //Resolucion de los ejercicios
 
+    private static List<Integer> filtrarNumerosPares(){
+        return numeros.stream()
+                .filter(n -> n % 2 == 0)
+                .toList();
+    }
 
+    private static List<String> transformarNombresAMayusculas(){
+        return nombres.stream()
+                .map(String::toUpperCase)
+                .toList();
+    }
+
+    private static List<Integer> ordenarListaNumeros(){
+        return numeros.stream()
+                .sorted().toList();
+    }
+
+    private static Long contarMayoresQue(int num){
+        return numeros.stream()
+                .filter(n -> n>num)
+                .count();
+    }
+
+    private static List<Integer> obtenerPrimeros5Elementos(){
+        return numeros.stream()
+                .limit(5)
+                .toList();
+    }
 }
