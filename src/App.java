@@ -40,8 +40,8 @@ public class App {
                 case 1 -> filtrarNumerosPares().forEach(System.out::println);
                 case 2 -> transformarNombresAMayusculas().forEach(System.out::println);
                 case 3 -> ordenarListaNumeros().forEach(System.out::println);
-                case 4 -> System.out.printf("Cantidad de números mayores que 5: %d", contarMayoresQue(5));
-                case 5 -> System.out.println("" + obtenerPrimeros5Elementos());
+                case 4 -> System.out.println("Cantidad de números mayores que 5: " + contarMayoresQue(5));
+                case 5 -> System.out.println(obtenerPrimeros5Elementos());
                 case 6 -> System.out.println(convertirPalabrasALongitud());
                 case 7 -> System.out.println(concatenarNombres());
                 case 8 -> System.out.println(eliminarDuplicados());
