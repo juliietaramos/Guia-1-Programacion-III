@@ -8,7 +8,7 @@ public class App {
     // Link de la guia: https://campus.mdp.utn.edu.ar/pluginfile.php/166681/mod_resource/content/1/Guia%20%231%20-%20Programacion%20Funcional-1.pdf
     // Listas de datos para usar en los ejercicios
     private static final List<Integer> numeros = List.of(8, 3, 5, 1, 9, 6, 12, 3, 7, 4, 2, 10, 15, 20);
-    //private static final List<Integer> numeros = List.of(1, 2, 3, 4, 5);
+    private static final List<Integer> numerosChicos = List.of(1, 2, 3, 4, 5);
     private static final List<String> nombres = List.of("Juan", "Ana", "Pedro", "Carla", "Miguel");
     private static final List<String> palabras = List.of("Java", "Stream", "Lambda", "Funcional", "API");
 
@@ -52,12 +52,12 @@ public class App {
                 case 9 -> obtenerTop3Numeros().forEach(System.out::println);
                 case 10 -> System.out.println(agruparPalabrasPorLongitud());
                 case 11 -> System.out.println("El producto de los numeros es: " + productoDeNumeros());
-                //case 12 -> nombreMasLargo();
-                //case 13 -> listaEnterosComoString();
-                //case 14 -> agruparParesEImpares();
-                //case 15 -> sumaDeCuadradosImpares();
-                //case 0 -> System.out.println("Saliendo del programa...");
-                //default -> System.out.println("Opción no válida, intente de nuevo.");
+                case 12 -> System.out.println("El nombre mas largo es: " + nombreMasLargo());
+                case 13 -> System.out.println("Lista de numeros convertido a string con comas: " + listaEnterosComoString());
+                case 14 -> System.out.println(agruparParesEImpares());
+                case 15 -> System.out.println("La suma de los cuadrados de los numeros impares es: " + sumaDeCuadradosImpares());
+                case 0 -> System.out.println("Saliendo del programa...");
+                default -> System.out.println("Opción no válida, intente de nuevo.");
             }
         } while (opcion != 0);
 
@@ -126,8 +126,34 @@ public class App {
     }
 
     private static Integer productoDeNumeros(){
-        return numeros.stream()
+        return numerosChicos.stream()
                 .reduce(1, (n1,n2) -> n1*n2);
+    }
+
+    private static String nombreMasLargo(){
+        return nombres.stream()
+                .reduce(String.valueOf(1), (n1, n2) -> n1.toString().length()>n2.toString().length() ? n1 : n2 );
+    }
+
+    private static String listaEnterosComoString(){
+        return numeros.stream()
+                .map(n->n.toString())
+                .collect(Collectors.joining(", "));
+    }
+
+    private static Map<Boolean,List<Integer>> agruparParesEImpares(){
+        return numeros.stream()
+                .collect(Collectors.partitioningBy(n -> n%2 ==0));
+    }
+
+    private static Integer sumaDeCuadradosImpares(){
+        /*Usa filter, map y reduce para obtener la suma de los
+cuadrados de los números impares de una lista.*/
+        return numerosChicos.stream()
+                .filter(n -> n % 2 != 0)
+                .map(n -> n*n)
+                .reduce((n1 , n2) -> n1 + n2)
+                .orElse(0);
     }
 
 }
