@@ -1,10 +1,14 @@
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class App {
+    // Link de la guia: https://campus.mdp.utn.edu.ar/pluginfile.php/166681/mod_resource/content/1/Guia%20%231%20-%20Programacion%20Funcional-1.pdf
     // Listas de datos para usar en los ejercicios
     private static final List<Integer> numeros = List.of(8, 3, 5, 1, 9, 6, 12, 3, 7, 4, 2, 10, 15, 20);
+    //private static final List<Integer> numeros = List.of(1, 2, 3, 4, 5);
     private static final List<String> nombres = List.of("Juan", "Ana", "Pedro", "Carla", "Miguel");
     private static final List<String> palabras = List.of("Java", "Stream", "Lambda", "Funcional", "API");
 
@@ -46,8 +50,8 @@ public class App {
                 case 7 -> System.out.println(concatenarNombres());
                 case 8 -> System.out.println(eliminarDuplicados());
                 case 9 -> obtenerTop3Numeros().forEach(System.out::println);
-                //case 10 -> agruparPalabrasPorLongitud();
-                //case 11 -> productoDeNumeros();
+                case 10 -> System.out.println(agruparPalabrasPorLongitud());
+                case 11 -> System.out.println("El producto de los numeros es: " + productoDeNumeros());
                 //case 12 -> nombreMasLargo();
                 //case 13 -> listaEnterosComoString();
                 //case 14 -> agruparParesEImpares();
@@ -114,6 +118,16 @@ public class App {
                 .sorted(Comparator.reverseOrder())
                 .limit(3)
                 .toList();
+    }
+
+    private static Map<Integer, List<String>> agruparPalabrasPorLongitud(){
+        return palabras.stream()
+                .collect(Collectors.groupingBy(String::length));
+    }
+
+    private static Integer productoDeNumeros(){
+        return numeros.stream()
+                .reduce(1, (n1,n2) -> n1*n2);
     }
 
 }
